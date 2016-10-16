@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">K100P接触式EMV L1测试程序</string>
+    <string name="action_settings">Settings</string>
+    <string name="write_serial">write</string>
+    <string name="write_serial3">进入5秒loopback</string>
+    <string name="write_serial5">进入30秒loopback</string>
+	<string name="write_content">重启设备以后点击按钮!</string>
+</resources>

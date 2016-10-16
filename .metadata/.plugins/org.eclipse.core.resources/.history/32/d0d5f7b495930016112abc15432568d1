@@ -1,0 +1,21 @@
+package com.byteflyer.redis;
+
+import java.util.Set;
+
+import com.byteflyer.redis.uitls.JedisPoolUtil;
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+
+public class string_03 {
+
+	private static JedisPool jedisPool;
+
+	public static void main(String[] args) {
+		jedisPool = JedisPoolUtil.getJedisPoolInstance();
+		Jedis jedis = jedisPool.getResource();
+		jedis.multi();
+
+	}
+
+}

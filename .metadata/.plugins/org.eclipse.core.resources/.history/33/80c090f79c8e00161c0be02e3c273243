@@ -1,0 +1,96 @@
+package com.byteflyer.serialport;
+
+import java.io.ByteArrayOutputStream;
+
+public class MyFunc {
+	private static String hexString = "0123456789ABCDEFabcdef";
+	// -------------------------------------------------------
+	static public int isOdd(int num) {
+		return num & 0x1;
+	}
+
+	// -------------------------------------------------------
+	static public int HexToInt(String inHex)// Hex�ַ�תint
+	{
+		return Integer.parseInt(inHex, 16);
+	}
+
+	// -------------------------------------------------------
+	static public byte HexToByte(String inHex)// Hex�ַ�תbyte
+	{
+		return (byte) Integer.parseInt(inHex, 16);
+	}
+
+	// -------------------------------------------------------
+	static public String Byte2Hex(Byte inByte)// 1�ֽ�ת2��Hex�ַ�
+	{
+		return String.format("%02x", inByte).toUpperCase();
+	}
+
+	// -------------------------------------------------------
+	static public String ByteArrToHex(byte[] inBytArr)// �ֽ�����תתhex�ַ�
+	{
+		StringBuilder strBuilder = new StringBuilder();
+		int j = inBytArr.length;
+		for (int i = 0; i < j; i++) {
+			strBuilder.append(Byte2Hex(inBytArr[i]));
+			strBuilder.append(" ");
+		}
+		return strBuilder.toString();
+	}
+
+	// -------------------------------------------------------
+	static public String ByteArrToHex(byte[] inBytArr, int offset, int byteCount)// �ֽ�����תתhex�ַ���ѡ����
+	{
+		StringBuilder strBuilder = new StringBuilder();
+		int j = byteCount;
+		for (int i = offset; i < j; i++) {
+			strBuilder.append(Byte2Hex(inBytArr[i]));
+		}
+		return strBuilder.toString();
+	}
+
+	// -------------------------------------------------------
+	// תhex�ַ�ת�ֽ�����
+	static public byte[] HexToByteArr(String inHex)// hex�ַ�ת�ֽ�����
+	{
+		int hexlen = inHex.length();
+		byte[] result;
+		if (isOdd(hexlen) == 1) {// ����
+			hexlen++;
+			result = new byte[(hexlen / 2)];
+			inHex = "0" + inHex;
+		} else {// ż��
+			result = new byte[(hexlen / 2)];
+		}
+		int j = 0;
+		for (int i = 0; i < hexlen; i += 2) {
+			result[j] = HexToByte(inHex.substring(i, i + 2));
+			j++;
+		}
+		return result;
+	}
+
+	public static String encode(String str) {
+		byte[] bytes = str.getBytes();
+		StringBuilder sb = new StringBuilder(bytes.length * 2);
+		// 转换hex编码
+		for (byte b : bytes) {
+			sb.append(Integer.toHexString(b + 0x800).substring(1));
+		}
+		str = sb.toString();
+		return str;
+	}
+
+	// 把hex编码转换为string
+	public static String decode(String bytes) {
+		bytes = bytes.toUpperCase();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream(
+				bytes.length() / 2);
+		// 将每2�?16进制整数组装成一个字�?
+		for (int i = 0; i < bytes.length(); i += 2)
+			baos.write((hexString.indexOf(bytes.charAt(i)) << 4 | hexString
+					.indexOf(bytes.charAt(i + 1))));
+		return new String(baos.toByteArray());
+	}
+}

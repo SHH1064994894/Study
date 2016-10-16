@@ -1,0 +1,39 @@
+package com.byteflyer.redis;
+
+import java.util.Set;
+
+import com.byteflyer.redis.uitls.JedisPoolUtil;
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+
+public class key_02 {
+
+	private static JedisPool jedisPool;
+
+	public static void main(String[] args) {
+		jedisPool = JedisPoolUtil.getJedisPoolInstance();
+		Jedis jedis = jedisPool.getResource();
+		// 删除KEY
+		// Long del = jedis.del("shh");
+		// 判断KEY是否存在
+		// Boolean exists = jedis.exists("shh");
+		// 设置KEY的过期时间
+		// jedis.expireAt("shh2", 5000);
+		// 移除KEY过期时间
+		// jedis.persist("shh");
+		// 获取指定的KEY
+		// String key = jedis.get("shh");
+		// 移到指定数据库下标
+		// Long move = jedis.move("shh", 1);
+		// 返回过期时间毫秒单位
+		// jedis.ttl("shh");
+		// 随机从数据库返回一条KEY
+		//String randomKey = jedis.randomKey();
+		//修改KEY的名称
+		jedis.rename("shh", "");
+		System.out.println(randomKey);
+
+	}
+
+}

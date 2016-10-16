@@ -1,0 +1,14 @@
+package com.byteflyer.redis;
+
+import redis.clients.jedis.Jedis;
+
+public class redis_test {
+	public static void main(String[] args) {
+		// 连接本地的 Redis 服务
+		Jedis jedis = new Jedis("192.168.1.18");
+		System.out.println("Connection to server sucessfully");
+		// 查看服务是否运行
+		System.out.println("Server is running: " + jedis.ping());
+		System.out.println("Stored string in redis:: "+ jedis.get("shh"));
+	}
+}

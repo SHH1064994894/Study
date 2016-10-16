@@ -1,0 +1,10 @@
+package com.byteflyer.redis;
+
+public class redis_test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
